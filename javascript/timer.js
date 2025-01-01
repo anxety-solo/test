@@ -122,7 +122,7 @@ function createElement(tag, className, attributes = {}, children = []) {
 }
 
 // Toggle functions
-function toggleNotification(audio, input, button, image) {
+function toggleNotification(audio, volumeInput, button, image) {
     audio.muted = !audio.muted;
     audio.currentTime = 0; // Reset audio to start
     if (!audio.muted) {
@@ -157,8 +157,8 @@ function toggleNSFWBlur(button, image) {
 function createTimer() {
     const app = gradioApp();
     const quickSettings = app.querySelector("#quicksettings");
-    let audio = app.querySelector("#audio_notification > audio"); // Gradio 3
-    let input = app.querySelector("#audio_notification > input"); // Gradio 4
+    let audio = app.querySelector("#audio_notification > audio");         // Gradio 3
+    volumeInput = app.querySelector("#audio_notification input#volume");  // Gradio 4
     
     // Fix Null
     if (!audio) {
@@ -200,7 +200,7 @@ function createTimer() {
     });
     const audioImage = createElement("img", "", { src: ALARM_BELL_ICON, width: 20 });
     audioDiv.appendChild(audioImage);
-    audioDiv.addEventListener("click", () => toggleNotification(audio, input, audioDiv, audioImage));
+    audioDiv.addEventListener("click", () => toggleNotification(audio, volumeInput, audioDiv, audioImage));
     mainDiv.appendChild(audioDiv);
 
     // NSFW Blur
