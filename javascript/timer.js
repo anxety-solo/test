@@ -135,6 +135,11 @@ function toggleNotification(audio, volumeInput, button, image) {
     
     if (volumeInput) {
         volumeInput.value = audio.muted ? 0 : 1;
+        let eventInput = new Event('input', {
+            bubbles: true,
+            cancelable: true,
+        });
+        volumeInput.dispatchEvent(eventInput);
     }
 }
 
