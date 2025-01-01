@@ -46,7 +46,6 @@ const CIVITAI_ICON = "file=extensions/timer/__files__/icon/CivitAi_Icon.svg";
 const CIVITAI_URL = "https://civitai.com/models";
 const TIMER_FILE = "file=static/timer.txt";
 const PINGGY_TIMER_FILE = "file=static/timer-pinggy.txt";
-const NOTIFICATION_FILE = "file=extensions/timer/__files__/notification.mp3";
 
 // Timer class
 class Timer {
@@ -122,10 +121,9 @@ function createElement(tag, className, attributes = {}, children = []) {
 }
 
 // Toggle functions
-function toggleNotification(audio, button, image) {
+function toggleNotification(audio, input, button, image) {
     audio.muted = !audio.muted;
     audio.currentTime = 0; // Reset audio to start
-    audio.volume = audio.muted ? 0 : 1; // FIX???
     if (!audio.muted) {
         audio.play().catch(e => console.error("Error playing notification sound:", e));
     }
@@ -133,6 +131,10 @@ function toggleNotification(audio, button, image) {
     button.style.borderColor = audio.muted ? "#FF005D" : "#00FF8C";
     button.style.backgroundColor = audio.muted ? "rgba(255, 0, 93, 0.08)" : "rgba(0, 255, 140, 0.08)";
     image.src = audio.muted ? ALARM_BELL_CANCELLED_ICON : ALARM_BELL_ICON;
+    
+    if (input) {
+        input.value = audio.muted ? 0 : 1;
+    }
 }
 
 function toggleNSFWBlur(button, image) {
@@ -154,22 +156,8 @@ function toggleNSFWBlur(button, image) {
 function createTimer() {
     const app = gradioApp();
     const quickSettings = app.querySelector("#quicksettings");
-    let audio = app.querySelector("#audio_notification > audio");
-
-    if (!audio) {
-        let audioContainer = app.querySelector("#audio_notification");
-
-        // If the container is not found, create it
-        if (!audioContainer) {
-            audioContainer = createElement("div", "", { id: "audio_notification", class: "block gradio-audio hidden" });
-            app.appendChild(audioContainer);
-        }
-
-        // Create an audio element and add it to the container
-        // audio = createElement("audio", "", { src: NOTIFICATION_FILE });
-        audio = createElement("audio", "", { controls: "", preload: "metadata", src: NOTIFICATION_FILE, "data-testid": "undefined-audio" });
-        audioContainer.appendChild(audio);
-    }
+    const audio = app.querySelector("#audio_notification > audio"); // Gradio 3
+    const input = app.querySelector("#audio_notification > input"); // Gradio 4
 
     // Create main div
     const mainDiv = createElement("div", "justify-start", {
@@ -198,7 +186,7 @@ function createTimer() {
     });
     const audioImage = createElement("img", "", { src: ALARM_BELL_ICON, width: 20 });
     audioDiv.appendChild(audioImage);
-    audioDiv.addEventListener("click", () => toggleNotification(audio, audioDiv, audioImage));
+    audioDiv.addEventListener("click", () => toggleNotification(audio, input, audioDiv, audioImage));
     mainDiv.appendChild(audioDiv);
 
     // NSFW Blur
