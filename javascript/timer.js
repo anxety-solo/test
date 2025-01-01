@@ -8,6 +8,7 @@ const CIVITAI_ICON = "file=extensions/timer/__files__/icon/CivitAi_Icon.svg";
 const CIVITAI_URL = "https://civitai.com/models";
 const TIMER_FILE = "file=static/timer.txt";
 const PINGGY_TIMER_FILE = "file=static/timer-pinggy.txt";
+const NOTIFICATION_FILE = "file=extensions/timer/__files__/notification.mp3"
 
 // Timer class
 class Timer {
@@ -127,7 +128,7 @@ function createTimer() {
 
         // Create an audio element and add it to the container
         audio = createElement("audio", "", {
-            src: "file=extensions/timer/__files__/notification.mp3"
+            src: NOTIFICATION_FILE
         });
         audioContainer.appendChild(audio);
     }
@@ -159,13 +160,7 @@ function createTimer() {
     });
     const audioImage = createElement("img", "", { src: ALARM_BELL_ICON, width: 20 });
     audioDiv.appendChild(audioImage);
-    audioDiv.addEventListener("click", () => {
-        if (audio) {
-            toggleNotification(audio, audioDiv, audioImage);
-        } else {
-            console.warn("Audio element not available for notification.");
-        }
-    });
+    audioDiv.addEventListener("click", () => toggleNotification(audio, audioDiv, audioImage));
     mainDiv.appendChild(audioDiv);
 
     // NSFW Blur
