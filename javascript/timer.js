@@ -125,6 +125,7 @@ function createElement(tag, className, attributes = {}, children = []) {
 function toggleNotification(audio, button, image) {
     audio.muted = !audio.muted;
     audio.currentTime = 0; // Reset audio to start
+    audio.volume = audio.muted ? 0 : 1; // FIX???
     if (!audio.muted) {
         audio.play().catch(e => console.error("Error playing notification sound:", e));
     }
@@ -160,7 +161,7 @@ function createTimer() {
 
         // If the container is not found, create it
         if (!audioContainer) {
-            audioContainer = createElement("div", "", { id: "audio_notification", class: "block gradio-audio svelte-90oupt hidden" });
+            audioContainer = createElement("div", "", { id: "audio_notification", class: "block gradio-audio hidden" });
             app.appendChild(audioContainer);
         }
 
