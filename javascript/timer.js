@@ -46,6 +46,7 @@ const CIVITAI_ICON = "file=extensions/timer/__files__/icon/CivitAi_Icon.svg";
 const CIVITAI_URL = "https://civitai.com/models";
 const TIMER_FILE = "file=static/timer.txt";
 const PINGGY_TIMER_FILE = "file=static/timer-pinggy.txt";
+const NOTIFICATION_FILE = "file=notification.mp3";
 
 // Timer class
 class Timer {
