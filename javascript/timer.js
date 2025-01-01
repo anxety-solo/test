@@ -46,7 +46,8 @@ const CIVITAI_ICON = "file=extensions/timer/__files__/icon/CivitAi_Icon.svg";
 const CIVITAI_URL = "https://civitai.com/models";
 const TIMER_FILE = "file=static/timer.txt";
 const PINGGY_TIMER_FILE = "file=static/timer-pinggy.txt";
-const NOTIFICATION_FILE = "file=extensions/timer/__files__/notification.mp3";
+// const NOTIFICATION_FILE = "file=extensions/timer/__files__/notification.mp3";
+const NOTIFICATION_FILE = "file=notification.mp3";
 
 // Timer class
 class Timer {
@@ -166,7 +167,7 @@ function createTimer() {
 
         // Create an audio element and add it to the container
         // audio = createElement("audio", "", { src: NOTIFICATION_FILE });
-        audio = createElement("audio", "", { controls: true, preload: "metadata", src: NOTIFICATION_FILE, "data-testid": "undefined-audio" });
+        audio = createElement("audio", "", { controls: "", preload: "metadata", src: NOTIFICATION_FILE, "data-testid": "undefined-audio" });
         audioContainer.appendChild(audio);
     }
 
