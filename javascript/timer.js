@@ -20,7 +20,7 @@ Object.defineProperty(document, 'title', {
 
 // TIMER
 // Language settings
-const translations = {
+const translationsTimer = {
     "en": {
         connecting: "Connecting...",
         refreshTooltip: "Click to refresh.",
@@ -47,7 +47,7 @@ const translations = {
 
 // Detect UserLang
 const userLang = (navigator.language || navigator.userLanguage).split('-')[0];
-const t = translations[userLang] || translations["en"]; // Fallback to English if language not supported
+const t = translationsTimer[userLang] || translationsTimer["en"]; // Fallback to English if language not supported
 
 // Constants
 const CLOCK_ICON = "file=extensions/timer/__files__/icon/clock.svg";
