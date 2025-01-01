@@ -133,8 +133,8 @@ function toggleNotification(audio, volumeInput, button, image) {
     button.style.backgroundColor = audio.muted ? "rgba(255, 0, 93, 0.08)" : "rgba(0, 255, 140, 0.08)";
     image.src = audio.muted ? ALARM_BELL_CANCELLED_ICON : ALARM_BELL_ICON;
     
-    if (input) {
-        input.value = audio.muted ? 0 : 1;
+    if (volumeInput) {
+        volumeInput.value = audio.muted ? 0 : 1;
     }
 }
 
