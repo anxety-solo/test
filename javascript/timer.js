@@ -1,22 +1,9 @@
 // FUNNY
-// Change the page title
-document.title = 'Stable Diffusion · ANXETY';
-
 // Change the tab icon to a purple heart symbol
 const link = document.createElement('link');
 link.rel = 'icon';
 link.href = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="purple" viewBox="0 0 16 16"><text x="0" y="12" font-size="12">💜</text></svg>';
 document.head.appendChild(link);
-
-// Ensure the title change remains permanent
-Object.defineProperty(document, 'title', {
-    set: function(value) {
-        console.warn('Attempt to change title blocked:', value);
-    },
-    get: function() {
-        return 'Stable Diffusion · ANXETY';
-    }
-});
 
 // TIMER
 // Language settings
@@ -178,9 +165,8 @@ function createTimer() {
         }
 
         // Create an audio element and add it to the container
-        audio = createElement("audio", "", {
-            src: NOTIFICATION_FILE
-        });
+        // audio = createElement("audio", "", { src: NOTIFICATION_FILE });
+        audio = createElement("audio", "", { controls: true, preload: "metadata", src: NOTIFICATION_FILE, "data-testid": "undefined-audio" });
         audioContainer.appendChild(audio);
     }
 
