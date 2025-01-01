@@ -156,8 +156,21 @@ function toggleNSFWBlur(button, image) {
 function createTimer() {
     const app = gradioApp();
     const quickSettings = app.querySelector("#quicksettings");
-    const audio = app.querySelector("#audio_notification > audio"); // Gradio 3
-    const input = app.querySelector("#audio_notification > input"); // Gradio 4
+    let audio = app.querySelector("#audio_notification > audio"); // Gradio 3
+    let input = app.querySelector("#audio_notification > input"); // Gradio 4
+    
+    // Fix Null
+    if (!audio) {
+        let audioContainer = app.querySelector("#audio_notification");
+        // If the container is not found, create it
+        if (!audioContainer) {
+            audioContainer = createElement("div", "", { id: "audio_notification", class: "block gradio-audio hidden" });
+            app.appendChild(audioContainer);
+        }
+        // Create an audio element and add it to the container
+        audio = createElement("audio", "", { src: NOTIFICATION_FILE });
+        audioContainer.appendChild(audio);
+    }
 
     // Create main div
     const mainDiv = createElement("div", "justify-start", {
