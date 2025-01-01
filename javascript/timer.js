@@ -160,13 +160,13 @@ function createTimer() {
 
         // If the container is not found, create it
         if (!audioContainer) {
-            audioContainer = createElement("div", "", { id: "audio_notification" });
+            audioContainer = createElement("div", "", { id: "audio_notification", class: "block gradio-audio svelte-90oupt hidden" });
             app.appendChild(audioContainer);
         }
 
         // Create an audio element and add it to the container
-        audio = createElement("audio", "", { src: NOTIFICATION_FILE });
-        // audio = createElement("audio", "", { controls: "", preload: "metadata", src: NOTIFICATION_FILE, "data-testid": "undefined-audio" });
+        // audio = createElement("audio", "", { src: NOTIFICATION_FILE });
+        audio = createElement("audio", "", { controls: "", preload: "metadata", src: NOTIFICATION_FILE, "data-testid": "undefined-audio" });
         audioContainer.appendChild(audio);
     }
 
